@@ -405,142 +405,141 @@ input[type="range"] { accent-color: var(--accent); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
+/* =========================================
+   Track controls: layout and slider sizing
+   ========================================= */
 
-/* Layout hardening: keep toolbar controls in normal flow on desktop and mobile. */
-.topbar {
+/* トラック全体を縦に広げる */
+.tl-track {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  min-width: 0;
+  align-items: stretch;
+  height: 150px;
+  min-height: 150px;
+  box-sizing: border-box;
 }
-.tb-left, .tb-mid, .tb-right {
-  display: flex;
-  align-items: center;
-  flex: 0 1 auto;
-  flex-wrap: wrap;
-  min-width: 0;
-  max-width: 100%;
-}
-.tb-left { flex: 1 1 260px; }
-.tb-mid { flex: 1 1 260px; }
-.tb-right { flex: 0 1 auto; }
-.proj-name { min-width: 0; max-width: 100%; }
 
-.transport {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  min-width: 0;
-  max-width: 100%;
-}
-.transport > * { flex: 0 0 auto; min-width: 0; }
-.transport label { display: inline-flex; flex: 0 1 auto; flex-wrap: wrap; min-width: 0; }
-.transport input, .transport select { max-width: 100%; }
-.transport .grow { flex: 1 1 12px; min-width: 12px; }
+/* トラック左側の操作欄 */
+.tl-thead {
+  width: 205px;
+  min-width: 205px;
+  height: 150px;
+  min-height: 150px;
+  flex-shrink: 0;
 
-.tl-addtrack-row {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+
+  padding: 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* トラック名 */
+.tl-tname {
   width: 100%;
   min-width: 0;
-  padding: 8px;
-}
-.tl-addtrack-row .btn {
-  flex: 0 1 auto;
-  min-width: 0;
-  max-width: 100%;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  line-height: 1.35;
+  flex-shrink: 0;
 }
 
-.dock-head, .dock-head > * {
-  min-width: 0;
-}
-.dock-head {
+/* M・S・複製・削除ボタン */
+.tl-tbtns {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-wrap: nowrap;
+  gap: 4px;
+  flex-shrink: 0;
 }
-.dock-head button { flex: 0 1 auto; max-width: 100%; white-space: normal; }
 
-.lib-tools {
+/* 音量・パンの行 */
+.tl-vol,
+.tl-pan {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  justify-content: flex-start;
+  gap: 6px;
+
+  width: 100%;
   min-width: 0;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
 }
-.lib-tools input[type="search"] { flex: 1 1 180px; min-width: 0; }
-.lib-tools select { flex: 0 1 160px; min-width: 90px; }
-.lib-tools .chk { flex: 0 0 auto; }
-.lib-item { min-width: 0; }
-.lib-info { min-width: 0; overflow-wrap: anywhere; }
-.lib-btns { flex: 0 1 auto; min-width: 0; }
 
-button, input, select { max-width: 100%; }
-button { overflow-wrap: anywhere; }
-.row, .pd-row, .toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-}
-.row > *, .pd-row > *, .toolbar > * { min-width: 0; max-width: 100%; }
+/* 音量・パンのスライダー
+   横幅を半分にして、親要素からはみ出さない */
+.tl-vol input[type="range"],
+.tl-pan input[type="range"] {
+  display: block;
 
-@media (max-width: 1180px) {
-  .topbar { align-items: flex-start; }
-  .tb-left, .tb-mid, .tb-right { flex: 1 1 220px; }
-  .transport { padding-inline: 10px; }
-}
-@media (max-width: 900px) {
-  .topbar { align-items: stretch; }
-  .tb-left, .tb-mid, .tb-right { flex: 1 1 100%; }
-  .transport { align-items: center; }
-  .transport .sep { display: none; }
-}
-@media (max-width: 600px) {
-  .tl-addtrack-row { align-items: stretch; }
-  .tl-addtrack-row .btn { flex: 1 1 160px; }
-  .lib-item { align-items: flex-start; }
-  .lib-wave { width: 72px; }
-  .lib-btns { flex: 1 1 100%; max-width: none; }
-  .transport > * { flex: 0 1 auto; }
-}
-/* ===== スライダーのサイズを約1/2に調整 ===== */
-
-/* トラックの音量・パン */
-.tl-vol input,
-.tl-pan input {
   width: 50%;
+  max-width: 50%;
+  min-width: 0;
+  flex: 0 1 50%;
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* トラックのFXボタン */
+.tl-thead > .btn {
+  flex-shrink: 0;
+  align-self: flex-start;
   max-width: 100%;
 }
 
-/* エフェクトのパラメータ */
+/* 音声クリップ表示欄 */
+.tl-lane {
+  height: 150px;
+  min-height: 150px;
+  min-width: 900px;
+  flex: 1 1 auto;
+}
+
+/* トラック追加ボタンは独立した行にする */
+.tl-addtrack-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  position: relative;
+  width: 100%;
+  min-height: 48px;
+  height: auto;
+
+  margin: 0;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   Other sliders: reduce only those not
+   already set to half width
+   ========================================= */
+
+/* エフェクトの調整スライダー */
 .ctl input[type="range"] {
   flex: 0 1 50%;
+  width: 50%;
   max-width: 50%;
+  min-width: 0;
 }
 
-/* ライブモードの音量など */
+/* ライブモードのメーター */
 .live-meters label {
   width: 80px;
 }
 
-/* ライブミックス */
+/* ライブミックスのスライダー */
 .live-mix input[type="range"] {
   width: 50%;
-  max-width: 100%;
+  max-width: 50%;
 }
 
-/* マスター・ミキサーの縦フェーダー */
+/* ミキサーの縦フェーダー領域 */
 .ms-fadewrap {
   height: 95px;
 }
@@ -549,39 +548,41 @@ button { overflow-wrap: anywhere; }
 .fader {
   width: 12px;
 }
-/* トラック音量・パンのスライダー位置を修正 */
-.tl-thead {
-  align-items: stretch;
-  overflow: hidden;
+
+/* =========================================
+   Responsive layout
+   ========================================= */
+
+@media (max-width: 1180px) {
+  .tl-thead {
+    width: 170px;
+    min-width: 170px;
+  }
+
+  .auto-lane {
+    margin-left: 170px;
+  }
 }
 
-.tl-vol,
-.tl-pan {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  min-width: 0;
-  margin: 0;
-  gap: 6px;
-}
+@media (max-width: 600px) {
+  .tl-track {
+    height: 150px;
+    min-height: 150px;
+  }
 
-.tl-vol input[type="range"],
-.tl-pan input[type="range"] {
-  display: block;
-  flex: 0 1 50%;
-  width: 50%;
-  min-width: 0;
-  max-width: 50%;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  vertical-align: middle;
-}
+  .tl-thead {
+    width: 132px;
+    min-width: 132px;
+    height: 150px;
+    padding: 6px;
+  }
 
-/* トラック追加ボタンとの間隔 */
-.tl-addtrack-row {
-  position: relative;
-  clear: both;
-  margin-top: 0;
-  padding-top: 8px;
+  .tl-lane {
+    height: 150px;
+    min-width: 700px;
+  }
+
+  .auto-lane {
+    margin-left: 132px;
+  }
 }

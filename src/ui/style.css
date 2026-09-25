@@ -406,60 +406,111 @@ input[type="range"] { accent-color: var(--accent); }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
 
-/* サウンドトラック追加などの操作ボタンの重なり修正 */
-
-/* 操作エリアのボタンを自動折り返し */
-.transport,
-.toolbar,
-.row,
-.pd-row {
+/* Layout hardening: keep toolbar controls in normal flow on desktop and mobile. */
+.topbar {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
+  flex-wrap: wrap;
   min-width: 0;
 }
-
-/* ボタンが押しつぶされないようにする */
-.transport button,
-.toolbar button,
-.row button,
-.pd-row button {
-  flex: 0 0 auto;
+.tb-left, .tb-mid, .tb-right {
+  display: flex;
+  align-items: center;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  min-width: 0;
   max-width: 100%;
-  white-space: normal;
-  overflow-wrap: anywhere;
 }
+.tb-left { flex: 1 1 260px; }
+.tb-mid { flex: 1 1 260px; }
+.tb-right { flex: 0 1 auto; }
+.proj-name { min-width: 0; max-width: 100%; }
 
-/* サウンドトラック追加などの操作欄 */
-.track-toolbar,
-.track-actions,
-.audio-toolbar {
+.transport {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+}
+.transport > * { flex: 0 0 auto; min-width: 0; }
+.transport label { display: inline-flex; flex: 0 1 auto; flex-wrap: wrap; min-width: 0; }
+.transport input, .transport select { max-width: 100%; }
+.transport .grow { flex: 1 1 12px; min-width: 12px; }
+
+.tl-addtrack-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
   width: 100%;
   min-width: 0;
-  box-sizing: border-box;
+  padding: 8px;
+}
+.tl-addtrack-row .btn {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.35;
 }
 
-/* 小さい画面でも重ならないようにする */
-@media (max-width: 720px) {
-  .transport,
-  .toolbar,
-  .track-toolbar,
-  .track-actions,
-  .audio-toolbar {
-    flex-wrap: wrap;
-    gap: 6px;
-  }
+.dock-head, .dock-head > * {
+  min-width: 0;
+}
+.dock-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.dock-head button { flex: 0 1 auto; max-width: 100%; white-space: normal; }
 
-  .transport button,
-  .toolbar button,
-  .track-toolbar button,
-  .track-actions button,
-  .audio-toolbar button {
-    max-width: 100%;
-  }
+.lib-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.lib-tools input[type="search"] { flex: 1 1 180px; min-width: 0; }
+.lib-tools select { flex: 0 1 160px; min-width: 90px; }
+.lib-tools .chk { flex: 0 0 auto; }
+.lib-item { min-width: 0; }
+.lib-info { min-width: 0; overflow-wrap: anywhere; }
+.lib-btns { flex: 0 1 auto; min-width: 0; }
+
+button, input, select { max-width: 100%; }
+button { overflow-wrap: anywhere; }
+.row, .pd-row, .toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.row > *, .pd-row > *, .toolbar > * { min-width: 0; max-width: 100%; }
+
+@media (max-width: 1180px) {
+  .topbar { align-items: flex-start; }
+  .tb-left, .tb-mid, .tb-right { flex: 1 1 220px; }
+  .transport { padding-inline: 10px; }
+}
+@media (max-width: 900px) {
+  .topbar { align-items: stretch; }
+  .tb-left, .tb-mid, .tb-right { flex: 1 1 100%; }
+  .transport { align-items: center; }
+  .transport .sep { display: none; }
+}
+@media (max-width: 600px) {
+  .tl-addtrack-row { align-items: stretch; }
+  .tl-addtrack-row .btn { flex: 1 1 160px; }
+  .lib-item { align-items: flex-start; }
+  .lib-wave { width: 72px; }
+  .lib-btns { flex: 1 1 100%; max-width: none; }
+  .transport > * { flex: 0 1 auto; }
 }

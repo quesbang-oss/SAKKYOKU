@@ -405,3 +405,61 @@ input[type="range"] { accent-color: var(--accent); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
+
+/* サウンドトラック追加などの操作ボタンの重なり修正 */
+
+/* 操作エリアのボタンを自動折り返し */
+.transport,
+.toolbar,
+.row,
+.pd-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* ボタンが押しつぶされないようにする */
+.transport button,
+.toolbar button,
+.row button,
+.pd-row button {
+  flex: 0 0 auto;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+/* サウンドトラック追加などの操作欄 */
+.track-toolbar,
+.track-actions,
+.audio-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* 小さい画面でも重ならないようにする */
+@media (max-width: 720px) {
+  .transport,
+  .toolbar,
+  .track-toolbar,
+  .track-actions,
+  .audio-toolbar {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .transport button,
+  .toolbar button,
+  .track-toolbar button,
+  .track-actions button,
+  .audio-toolbar button {
+    max-width: 100%;
+  }
+}

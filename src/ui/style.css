@@ -514,3 +514,38 @@ button { overflow-wrap: anywhere; }
   .lib-btns { flex: 1 1 100%; max-width: none; }
   .transport > * { flex: 0 1 auto; }
 }
+/* ===== スライダーのサイズを約1/2に調整 ===== */
+
+/* トラックの音量・パン */
+.tl-vol input,
+.tl-pan input {
+  width: 50%;
+  max-width: 100%;
+}
+
+/* エフェクトのパラメータ */
+.ctl input[type="range"] {
+  flex: 0 1 50%;
+  max-width: 50%;
+}
+
+/* ライブモードの音量など */
+.live-meters label {
+  width: 80px;
+}
+
+/* ライブミックス */
+.live-mix input[type="range"] {
+  width: 50%;
+  max-width: 100%;
+}
+
+/* マスター・ミキサーの縦フェーダー */
+.ms-fadewrap {
+  height: 95px;
+}
+
+/* 縦フェーダー本体 */
+.fader {
+  width: 12px;
+}

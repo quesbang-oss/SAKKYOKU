@@ -1,0 +1,21 @@
+{
+  "name": "Voice DAW - 声を電子楽器に",
+  "short_name": "Voice DAW",
+  "description": "声を録音してノイズ除去・電子音化・楽器化し、鍵盤やパッドで演奏しながら曲を作れるブラウザ完結型の音声制作ツール",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "orientation": "any",
+  "background_color": "#0b0f16",
+  "theme_color": "#0b0f16",
+  "lang": "ja",
+  "dir": "ltr",
+  "categories": ["music", "productivity", "utilities"],
+  "icons": [
+    { "src": "./icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
